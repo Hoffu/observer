@@ -1,5 +1,8 @@
 package sample;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,46 +16,30 @@ import model.ComponentText;
 import model.TimeServer;
 
 public class Controller {
-    public Label status;
-    public Button button;
+    public Text status;
     public Text circle;
     public MediaView media;
     public TextField startTimeInput;
     public Arc circleShape;
+    public Button musicButton;
+    public Button animationButton;
+    public Button textButton1;
     private TimeServer timeServer;
     private boolean powerUp = true;
+    private boolean textButton = true;
+    private boolean music = true;
+    private boolean animation = true;
     private ComponentText componentText;
     private ComponentMusic componentMusic;
     private ComponentShape componentShape;
-    private int startTime = 10;
+    private int startTime = 30;
 
     public void initialize() {
         timeServer = new TimeServer();
-        componentText = new ComponentText(timeServer, circle);
+        timeServer.attach(new ComponentText(timeServer, status, false));
+        componentText = new ComponentText(timeServer, circle, true);
         componentMusic = new ComponentMusic(timeServer, media, startTime);
         componentShape = new ComponentShape(timeServer, circleShape);
-    }
-
-    public void powerUpClicked(ActionEvent actionEvent) {
-        if (powerUp) {
-            if (tryParseInt(startTimeInput.getText())) {
-                componentMusic.setStartTime(Integer.parseInt(startTimeInput.getText()));
-            }
-            powerUp = false;
-            button.setText("Stop");
-            status.setText("Активен");
-            timeServer.attach(componentText);
-            timeServer.attach(componentMusic);
-            timeServer.attach(componentShape);
-        } else {
-            powerUp = true;
-            button.setText("Start");
-            status.setText("Неактивен");
-            timeServer.detach(componentText);
-            timeServer.detach(componentMusic);
-            timeServer.detach(componentShape);
-            componentMusic.stopPlayer();
-        }
     }
 
     boolean tryParseInt(String value) {
@@ -61,6 +48,46 @@ public class Controller {
             return true;
         } catch (NumberFormatException e) {
             return false;
+        }
+    }
+
+    public void animationButtonClicked(ActionEvent actionEvent) {
+        if (animation) {
+            animation = false;
+            animationButton.setText("Stop");
+            timeServer.attach(componentShape);
+        } else {
+            animation = true;
+            animationButton.setText("Start");
+            timeServer.detach(componentShape);
+        }
+    }
+
+    public void musicButtonClicked(ActionEvent actionEvent) {
+        if (music) {
+            if (tryParseInt(startTimeInput.getText())) {
+                componentMusic.setStartTime(Integer.parseInt(startTimeInput.getText()));
+            }
+            music = false;
+            musicButton.setText("Stop");
+            timeServer.attach(componentMusic);
+        } else {
+            music = true;
+            musicButton.setText("Start");
+            timeServer.detach(componentMusic);
+            componentMusic.stopPlayer();
+        }
+    }
+
+    public void textButtonClicked(ActionEvent actionEvent) {
+        if (textButton) {
+            textButton = false;
+            textButton1.setText("Stop");
+            timeServer.attach(componentText);
+        } else {
+            textButton = true;
+            textButton1.setText("Start");
+            timeServer.detach(componentText);
         }
     }
 }

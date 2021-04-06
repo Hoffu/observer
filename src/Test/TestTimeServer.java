@@ -19,7 +19,7 @@ public class TestTimeServer {
 
     @Test
     public void testObservers() {
-        timeServer.attach(new ComponentText(timeServer, new Text()));
+        timeServer.attach(new ComponentText(timeServer, new Text(), true));
         timeServer.attach(new ComponentShape(timeServer, new Arc()));
         Assert.assertEquals(2, timeServer.getObservers().size());
     }
