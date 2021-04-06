@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="218.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <top>
+       <FlowPane prefHeight="26.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+           <BorderPane.margin>
+               <Insets top="5.0" />
+           </BorderPane.margin>
+           <Button fx:id="button" mnemonicParsing="false" onAction="#powerUpClicked" text="Start">
+              <FlowPane.margin>
+                  <Insets left="5.0" right="5.0" />
+              </FlowPane.margin>
+           </Button>
+           <Label fx:id="status" text="Неактивен">
+              <FlowPane.margin>
+                  <Insets left="5.0" />
+              </FlowPane.margin>
+           </Label>
+       </FlowPane>
+   </top>
+   <left>
+      <FlowPane alignment="CENTER" prefHeight="301.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fx:id="circle" strokeType="OUTSIDE" strokeWidth="0.0" text="Прошло с" />
+         </children>
+      </FlowPane>
+   </left>
+   <center>
+      <FlowPane prefHeight="225.0" prefWidth="271.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="195.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="startTimeInput" prefHeight="25.0" prefWidth="109.0" promptText="Время запуска (стандартное 10 с)" />
+                  <MediaView fx:id="media" fitHeight="200.0" fitWidth="200.0" />
+               </children>
+            </VBox>
+         </children>
+      </FlowPane>
+   </center>
+   <right>
+      <FlowPane prefHeight="147.0" prefWidth="157.0" BorderPane.alignment="CENTER">
+         <children>
+            <Arc fx:id="circleShape" fill="DODGERBLUE" length="270.0" radiusX="56.0" radiusY="56.0" startAngle="45.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+         </children>
+      </FlowPane>
+   </right>
+</BorderPane>
