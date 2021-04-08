@@ -21,6 +21,7 @@ public class TestTimeServer {
     public void testObservers() {
         timeServer.attach(new ComponentText(timeServer, new Text(), true));
         timeServer.attach(new ComponentShape(timeServer, new Arc()));
-        Assert.assertEquals(2, timeServer.getObservers().size());
+        timeServer.attach(new ComponentShape(timeServer, new Arc()));
+        Assert.assertEquals(3, timeServer.getObservers().size());
     }
 }
