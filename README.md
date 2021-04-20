@@ -6,7 +6,7 @@
 
 
 **Technology stack**:
-  - язык программирвоания Java.
+  - язык программирования Java.
 
 **Status**:
   - Alpha.
